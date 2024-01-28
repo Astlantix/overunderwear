@@ -5,7 +5,7 @@ using code = vision::code;
 
 brain Brain;
 
-controller ultrasense = controller(primary);
+controller mash = controller(primary);
 motor fl = motor(PORT15, ratio18_1, 1);
 motor fr = motor(PORT17, ratio18_1, 0);
 motor ml = motor(PORT7, ratio18_1, 0);
@@ -19,7 +19,7 @@ motor cata = motor(PORT2, ratio36_1, 0);
 limit plush = limit(Brain.ThreeWirePort.B);
 pneumatics bat = pneumatics(Brain.ThreeWirePort.A); // right wing
 pneumatics wing = pneumatics(Brain.ThreeWirePort.H); // left wing
-inertial spidey = inertial(PORT16);
+inertial inert = inertial(PORT16);
 
 bool remoteControlCodeEnabled = 1;
 

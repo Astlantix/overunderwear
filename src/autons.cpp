@@ -33,13 +33,13 @@ void auton1() {
   frwd(1.5);
   setv(25);
   R.spinFor(fwd,360,deg);
-  wingactionopen();
+  spread();
   wait(250,msec);
   setv(100);
   msc(intake);
   rvrs(17);
   frwd(5);
-  wingactionclose();
+  fold();
   rgt(180);
   msp(intake,1,90);
   frwd(5);
@@ -148,7 +148,7 @@ void auton4() {
   rgt(90);
   frwd(7.5);
   lft(90);
-  wingactionopen();
+  spread();
   rvrs(7.5);
   wait(100,msec);
   frwd(7.5);

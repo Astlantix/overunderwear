@@ -36,7 +36,7 @@ bool set = 1; // calibration check
 void pre_auton(void) {
   vexcodeInit();
   setstop();
-  wingactionclose();
+  fold();
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
@@ -56,17 +56,15 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
 
-  thread::interruptAll();
-
-  if (!auton) {
+  if (auton == 1) {
     auton1();
-  } else if (auton == 1) {
-    auton2();
   } else if (auton == 2) {
-    auton3();
+    auton2();
   } else if (auton == 3) {
+    auton3();
+  } else if (auton == 4) {
     auton4();
-  } else {
+  } else if (auton == 5) {
     auton5();
   }
   // ..........................................................................
@@ -84,18 +82,18 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   if (set) {
-    spidey.calibrate();
-    waitUntil(!spidey.isCalibrating());
+    inert.calibrate();
+    waitUntil(!inert.isCalibrating());
     set = 0;
   }
-  
-  thread dtcode = thread(arcade);
 
   while (!atnslct) {
     autonslctr();
-    if (ultrasense.ButtonB.pressing()) atnslct = 1;
+    if (mash.ButtonB.pressing()) atnslct = 1;
     wait(10,msec);
   }
+
+  thread dtcode = thread(arcade);
 
   while (atnslct) {
     // This is the main execution loop for the user control program.
@@ -103,12 +101,12 @@ void usercontrol(void) {
     // values based on feedback from the joysticks.
 
     // wings
-    ultrasense.ButtonY.pressed(wingaction);
-    ultrasense.ButtonY.released(flap);
+    mash.ButtonY.pressed(wingaction);
+    mash.ButtonY.released(flap);
 
     // catapult
-    ultrasense.ButtonX.pressed(punching);
-    ultrasense.ButtonX.released(pullback);
+    mash.ButtonX.pressed(punching);
+    mash.ButtonX.released(pullback);
 
     // intake
     intaking();
@@ -121,6 +119,7 @@ void usercontrol(void) {
       printing("HOT");
       checkhot = 1;
     }
+
 
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to

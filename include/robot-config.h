@@ -2,7 +2,7 @@ using namespace vex;
 
 extern brain Brain;
 
-extern controller ultrasense;
+extern controller mash;
 extern motor fl;
 extern motor fr;
 extern motor ml;
@@ -16,6 +16,6 @@ extern motor cata;
 extern limit plush;
 extern pneumatics bat;
 extern pneumatics wing;
-extern inertial spidey;
+extern inertial inert;
 
 void vexcodeInit(void);
