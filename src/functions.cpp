@@ -191,7 +191,6 @@ int arcade() {
       L.spin(fwd,leftspeed,pct);
       R.spin(fwd,rightspeed,pct);
     }
-    intaking();
     wait(10,msec);
   }
   this_thread::sleep_for(10);

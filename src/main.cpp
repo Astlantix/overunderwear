@@ -8,11 +8,18 @@
 /*----------------------------------------------------------------------------*/
 
 #include "vex.h"
+#include "autons.hpp"
+#include "functions.hpp"
 
 using namespace vex;
 
 // A global instance of competition
 competition Competition;
+
+bool atnslct = 0;
+bool hot = 0;
+bool checkhot = 0;
+bool set = 1; // calibration check
 
 // define your global instances of motors and other devices here
 
@@ -27,6 +34,9 @@ competition Competition;
 /*---------------------------------------------------------------------------*/
 void pre_auton(void) {
 
+  vexcodeInit();
+  setstop();
+  wingactionclose();
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
@@ -43,6 +53,20 @@ void pre_auton(void) {
 void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
+
+  thread::interruptAll();
+
+  if (!auton) {
+    auton1();
+  } else if (auton == 1) {
+    auton2();
+  } else if (auton == 2) {
+    auton3();
+  } else if (auton == 3) {
+    auton4();
+  } else {
+    auton5();
+  }
   // ..........................................................................
 }
 
@@ -57,10 +81,44 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 void usercontrol(void) {
   // User control code here, inside the loop
-  while (1) {
+  if (set) {
+    spidey.calibrate();
+    waitUntil(!spidey.isCalibrating());
+    set = 0;
+  }
+  
+  thread dtcode = thread(arcade);
+
+  while (!atnslct) {
+    autonslctr();
+    if (ultrasense.ButtonB.pressing()) atnslct = 1;
+    wait(10,msec);
+  }
+
+  while (atnslct) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
+
+    // wings
+    ultrasense.ButtonY.pressed(wingaction);
+    ultrasense.ButtonY.released(flap);
+
+    // catapult
+    ultrasense.ButtonX.pressed(punching);
+    ultrasense.ButtonX.released(pullback);
+
+    // intake
+    intaking();
+
+    // tempcheck
+    if (fl.temperature(celsius) > 45 || fr.temperature(celsius) > 45 || ml.temperature(celsius) > 45 || mr.temperature(celsius) > 45 || bl.temperature(celsius) > 45 || br.temperature(celsius) > 45 || cata.temperature(celsius) > 45 || intake.temperature(celsius) > 45) {
+      hot = 1;
+    }
+    if (hot && !checkhot) {
+      printing("HOT");
+      checkhot = 1;
+    }
 
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
