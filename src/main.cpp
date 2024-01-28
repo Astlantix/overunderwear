@@ -21,6 +21,7 @@ bool hot = 0;
 bool checkhot = 0;
 bool set = 1; // calibration check
 
+
 // define your global instances of motors and other devices here
 
 /*---------------------------------------------------------------------------*/
@@ -33,13 +34,14 @@ bool set = 1; // calibration check
 /*  not every time that the robot is disabled.                               */
 /*---------------------------------------------------------------------------*/
 void pre_auton(void) {
-
   vexcodeInit();
   setstop();
   wingactionclose();
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
+
+
 
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
