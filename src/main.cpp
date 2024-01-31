@@ -7,11 +7,33 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+/*-----------------------------------------------------------------------------*/
+/* NAME                               PORT                         CART/TYPE   */
+/* fl                                   1                          600 BLUE    */
+/* fr                                   2                          600 BLUE    */
+/* ml                                   3                          600 BLUE    */
+/* mr                                   4                          600 BLUE    */
+/* bl                                   5                          600 BLUE    */
+/* br                                   6                          600 BLUE    */
+/* bat                                  A                          PNEUMATIC   */
+/* wing                                 B                          PNEUMATIC   */
+/* intake                               4                          200 GREEN   */
+/* cata                                 5                          200 GREEN   */
+/* inert                                6                          INERTIAL    */
+/* mash                               MAIN                         CONTROLLER  */
+/* L                                  fl, ml, bl                   MOTOR GROUP */
+/* R                                  fr, mr, br                   MOTOR GROUP */
+/* Radio                                21                         RADIO       */
+/* Brain                               -----                       BRAIN       */
+/*-----------------------------------------------------------------------------*/
+
+
 #include "vex.h"
 #include "autons.hpp"
 #include "functions.hpp"
 
 using namespace vex;
+using namespace std;
 
 // A global instance of competition
 competition Competition;
@@ -37,6 +59,13 @@ void pre_auton(void) {
   vexcodeInit();
   setstop();
   fold();
+  inert.calibrate();
+  waitUntil(!inert.isCalibrating());
+  while (!atnslct) {
+    autonslctr();
+    if (mash.ButtonB.pressing()) atnslct = 1;
+    wait(10,msec);
+  }
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
@@ -66,6 +95,8 @@ void autonomous(void) {
     auton4();
   } else if (auton == 5) {
     auton5();
+  } else {
+    cout << "ERROR: auton not selected" << endl;
   }
   // ..........................................................................
 }
@@ -81,21 +112,10 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 void usercontrol(void) {
   // User control code here, inside the loop
-  if (set) {
-    inert.calibrate();
-    waitUntil(!inert.isCalibrating());
-    set = 0;
-  }
-
-  while (!atnslct) {
-    autonslctr();
-    if (mash.ButtonB.pressing()) atnslct = 1;
-    wait(10,msec);
-  }
 
   thread dtcode = thread(arcade);
 
-  while (atnslct) {
+  while (1) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
@@ -138,7 +158,7 @@ int main() {
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
-
+  Competition.bStopAllTasksBetweenModes = 0;
   // Run the pre-autonomous function.
   pre_auton();
 
