@@ -93,7 +93,7 @@
 				],
 				"settings": {
 					"foreground": "#46e1fc"
-				},
+				}
 			},
 			{
 				"name": "Keyword",
@@ -103,7 +103,7 @@
 				],
 				"settings": {
 					"foreground": "#ff0000"
-				},
+				}
 			},
 			{
 				"name": "Function",
