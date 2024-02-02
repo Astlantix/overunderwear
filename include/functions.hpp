@@ -18,6 +18,8 @@ void setstop(int mode = 0);
 void setv(double vel);
 void frwd(double dist, double adjust = 4);
 void rvrs(double dist, double adjust = 4);
+void For(double dist);
+void Rev(double dist);
 void lft(double ang, double adjust =  0.1);
 void rgt(double ang, double adjust = 0.1);
 void batmobile();

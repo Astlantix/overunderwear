@@ -146,6 +146,17 @@ void rvrs(double dist, double adjust) {
   R.spinFor(rev,target,deg);  
 }
 
+void Fwd(double dist) {
+  L.spinFor(fwd,dist*18,deg,0);
+  R.spinFor(fwd,dist*18,deg);
+}
+
+void Rev(double dist) {
+  L.spinFor(rev,dist*18,deg,0);
+  R.spinFor(rev,dist*18,deg);
+
+}
+
 void lft(double ang, double adjust) {
   setstop(1);
   inert.setRotation(0,deg);

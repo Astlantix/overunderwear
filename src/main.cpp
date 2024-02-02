@@ -113,8 +113,6 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
 
-  thread dtcode = thread(arcade);
-
   while (1) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
@@ -161,7 +159,7 @@ int main() {
   Competition.bStopAllTasksBetweenModes = 0;
   // Run the pre-autonomous function.
   pre_auton();
-
+  arcade();
   // Prevent main from exiting with an infinite loop.
   while (1) {
     wait(10, msec);

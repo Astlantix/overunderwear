@@ -2,6 +2,167 @@
 	"C_Cpp.default.systemIncludePath": [
 		"${config:vexrobotics.vexcode.Cpp.Sdk.Home}\\V5\\V5_20220726_10_00_00\\vexv5\\gcc\\include\\sys"
 	],
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#000000",
+		"activityBar.foreground": "#888BF2",
+		"statusBar.background": "#000000",
+		"statusBar.foreground": "#888BF2",
+		"statusBar.noFolderBackground": "#000000",
+		"statusBarItem.remoteBackground": "#000000",
+		"statusBarItem.remoteForeground": "#888BF2",
+		"activityBarBadge.foreground": "#888BF2",
+		"activityBarBadge.background": "#000000",
+		"editorGroupHeader.tabsBackground": "#000000",
+		"editor.background": "#000000",
+		"editor.foreground": "#888BF2",
+		"editorLineNumber.foreground": "#888BF2",
+		"editorLineNumber.activeForeground": "#DFB3F7",
+		"editorCursor.foreground": "#888BF2",
+		"editor.selectionBackground": "#9295f93d",
+		"editor.selectionHighlightBackground": "#9295f93d",
+		"editor.wordHighlightBackground": "#9295f93d",
+		"activityBar.inactiveForeground": "#DFB3F7",
+		"activityBar.activeBorder": "#888BF2",
+		"activityBar.border": "#000000",
+		"sideBar.background": "#000000",
+		"sideBar.foreground": "#888BF2",
+		"sideBarTitle.foreground": "#888BF2",
+		"sideBarSectionHeader.background": "#000000",
+		"gitDecoration.modifiedResourceForeground": "#1bd2eef0",
+		"commandCenter.inactiveForeground": "#000000",
+		"commandCenter.activeBackground": "#000000",
+		"commandCenter.activeBorder": "#000000",
+		"commandCenter.activeForeground": "#888BF2",
+		"menu.background": "#000000",
+		"menu.selectionBackground": "#9295f93d",
+		"tab.inactiveBackground": "#000000",
+		"tab.activeBackground": "#dfb3f73b",
+		"tab.hoverBackground": "#9295f93d",
+		"menubar.selectionBackground": "#9295f93d",
+		"tab.border": "#000000",
+		"window.activeBorder": "#000000",
+		"window.inactiveBorder": "#000000"
+	},
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": "vexlog.error",
+				"settings": {
+					"foreground": "#ff3232"
+				}
+			},
+			{
+				"scope": "vexlog.warning",
+				"settings": {
+					"foreground": "#FFFF00"
+				}
+			},
+			{
+				"scope": "vexlog.normal",
+				"settings": {
+					"foreground": "#4479ff"
+				}
+			},
+			{
+				"scope": "vexlog.battery",
+				"settings": {
+					"foreground": "#4479ff"
+				}
+			},
+			{
+				"scope": "vexlog.power",
+				"settings": {
+					"foreground": "#00a000"
+				}
+			},
+			{
+				"name": "Comment",
+				"scope": [
+					"comment",
+					"punctuation.definition.comment"
+				],
+				"settings": {
+					"foreground": "#888BF2"
+				}
+			},
+			{
+				"name": "Variables",
+				"scope": [
+					"variable",
+					"string constant.other.placeholder"
+				],
+				"settings": {
+					"foreground": "#46e1fc"
+				},
+			},
+			{
+				"name": "Keyword",
+				"scope": [
+					"keyword",
+					"storage"
+				],
+				"settings": {
+					"foreground": "#ff0000"
+				},
+			},
+			{
+				"name": "Function",
+				"scope": "entity.name.function",
+				"settings": {
+					"foreground": "#ff00ffd9"
+				}
+			},
+			{
+				"name": "String",
+				"scope": "string",
+				"settings": {
+					"foreground": "#DFB3F7"
+				}
+			},
+			{
+				"name": "Number",
+				"scope": "constant.numeric",
+				"settings": {
+					"foreground": "#a763fa"
+				}
+			},
+			{
+				"name": "Operators",
+				"scope": "keyword.operator",
+				"settings": {
+					"foreground": "#c73dea7f"
+				}
+			},
+			{
+				"name": "Punctuation",
+				"scope": "punctuation",
+				"settings": {
+					"foreground": "#888BF2"
+				}
+			},
+			{
+				"name": "Properties",
+				"scope": "support.type.property-name",
+				"settings": {
+					"foreground": "#8c23d8"
+				}
+			},
+			{
+				"name": "Types",
+				"scope": "storage.type",
+				"settings": {
+					"foreground": "#DFB3F7"
+				}
+			},
+			{
+				"name": "Method",
+				"scope": "entity.name.function",
+				"settings": {
+					"foreground": "#00eaffd9"
+				}
+			}
+		]
+	},
 	"files.associations": {
 		"algorithm": "cpp",
 		"array": "cpp",
