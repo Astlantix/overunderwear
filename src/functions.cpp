@@ -169,6 +169,12 @@ void rgt(double ang, double adjust) {
 }
 
 void batmobile() {
+  while (1) {
+    double speed;
+    if(mash.ButtonB.pressing()) {
+      
+    }
+  }
 }
 
 void arcade() {
