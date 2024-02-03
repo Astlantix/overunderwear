@@ -119,24 +119,17 @@ void auton2() {
 
 // Left Side Elims
 void auton3() {
-  Rev(7.5);
-  wait(10,msec);
-  Fwd(7.5);
-  wait(10,msec);
-  lft(30);
-  msp(intake,1);
-  Fwd(20);
-  wait(20,msec);
-  Rev(17);
+  msp(intake,1,90);
+  Fwd(15);
 }
 
 // skills
 void auton4() {
-  /*timer t;
+  timer t;
   t.clear();
   msp(cata);
   waitUntil(t.time(sec) >= 40);
-  msc(cata);*/
+  msc(cata);
   setv(90);
   lft(13);
   Rev(55);
