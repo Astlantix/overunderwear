@@ -15,105 +15,105 @@ using namespace std;
 
 // Right Side AWP 4 triballs
 void auton1() {
+  timer t;
   setv(36);
-  For(26.84);
+  Fwd(29);
   rgt(90);
   msp(intake,1,90);
-  wait(250,msec);
-  Rev(5);
-  rgt(137);
-  msp(intake);
-  For(6.25);
-  wait(200,msec);
-  rgt(165);
+  wait(100,msec);
+  rgt(135);
+  msp(intake,0);
+  Fwd(20);
+  wait(300,msec);
+  setv(10);
+  Rev(0.4);
+  rgt(170);
+  setv(36);
   msp(intake,1);
-  wait(600,msec);
-  lft(30);
-  msp(intake);
-  For(1.5);
-  setv(25);
+  wait(100,msec);
+  lft(60);
+  wait(100,msec);
+  msp(intake,0);
+  Fwd(4);
   R.spinFor(fwd,360,deg);
-  spread();
-  wait(250,msec);
-  setv(100);
   msc(intake);
-  Rev(17);
-  For(5);
-  fold();
+  spread();
+  Rev(20);
+  wait(100,msec);
+  Fwd(5);
+  wait(100,msec);
+  Rev(5);
+  wait(100,msec);
+  Fwd(5);
   rgt(180);
   msp(intake,1,90);
-  For(5);
+  wait(100,msec);
+  Fwd(5);
   wait(100,msec);
   Rev(5);
-  wait(100,msec);
-  For(5);
-  wait(100,msec);
-  Rev(5);
-  lft(55);
-  msc(intake);
-  Rev(27);
-  bat.open();
-  lft(40);
+  cout << t.time() << endl;
+  lft(75);
   /*msp(intake,1);
   wait(200,msec);
   lft(135);
   msp(intake);
-  For(20);
+  Fwd(20);
   wait(350,msec);
   Rev(25);
   rgt(135);
   msp(intake,1);
   wait(100,msec);
-  For(12);
+  Fwd(12);
   wings.open();
   lft(90);
   wings.close();
   rgt(45);
   msc(intake);
   wait(100,msec);
-  For(8.2);
+  Fwd(8.2);
   wait(100,msec);
   Rev(8.2);
   lft(73);
   msp(intake);
-  For(29);
+  Fwd(29);
   wait(100,msec);
   rgt(85);
   msp(intake,1);
   wait(100,msec);
   msp(intake);
   lft(40);
-  For(10);
+  Fwd(10);
   wait(100,msec);
   msc(intake);
   lft(90);
   wingactiona();
   Rev(17);
-  For(5);
+  Fwd(5);
   wingactionb();
   rgt(180);
   msp(intake,1,90);
-  For(5);*/
+  Fwd(5);*/
 }
 
 // Left Side AWP
 void auton2() {
-  bat.open();
+  setv(50);
+  wing.open();
   wait(300,msec);
   lft(45);
   wait(40,msec);
-  bat.close();
-  rgt(20); 
+  wing.close();
+  rgt(10); 
   msp(intake,1,90);
   setv(100);
-  For(12);
+  Fwd(12);
   wait(750,msec);
   Rev(1);
-  lft(90);
+  lft(78);
   msc(intake);
   setv(40);
   Rev(35);
-  bat.open();
+  wing.open();
   lft(25);
 }
 
@@ -121,46 +121,49 @@ void auton2() {
 void auton3() {
   Rev(7.5);
   wait(10,msec);
-  For(7.5);
+  Fwd(7.5);
   wait(10,msec);
   lft(30);
   msp(intake,1);
-  For(20);
+  Fwd(20);
   wait(20,msec);
   Rev(17);
 }
 
 // skills
 void auton4() {
-  timer t;
+  /*timer t;
   t.clear();
-  punching();
-  waitUntil(t.time() >= 40);
-  pullback();
-  rgt(25);
-  Rev(20);
-  lft(90);
+  msp(cata);
+  waitUntil(t.time(sec) >= 40);
+  msc(cata);*/
+  setv(90);
+  lft(13);
+  Rev(55);
+  rgt(90);
   Rev(10);
   wait(100,msec);
-  For(5);
-  rgt(90);
-  For(100);
-  rgt(90);
-  For(7.5);
+  Fwd(5);
   lft(90);
+  Fwd(15);
+  lft(90);
+  Fwd(20);
+  rgt(90);
   spread();
   Rev(7.5);
   wait(100,msec);
-  For(7.5);
+  Fwd(7.5);
   lft(90);
-  For(10);
+  Fwd(10);
   rgt(90);
   setv(40);
-  For(5);
+  Fwd(5);
 }
 
 // drivetrain test
 void auton5 () {
+  rgt(90);
+  wait(10,sec);
   msp(fr);
   wait(1,sec);
   msc(fr);

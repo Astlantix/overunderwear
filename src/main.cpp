@@ -84,7 +84,6 @@ void pre_auton(void) {
 void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
-
   if (auton == 1) {
     auton1();
   } else if (auton == 2) {

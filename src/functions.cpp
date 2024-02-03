@@ -134,18 +134,6 @@ void setv(double vel) {
   R.setVelocity(vel,pct);
 }
 
-void frwd(double dist, double adjust) {
-  double target = dist/(adjust*atan(1)*4)*360;
-  L.spinFor(fwd,target,deg,0);
-  R.spinFor(fwd,target,deg);  
-}
-
-void rvrs(double dist, double adjust) {
-  double target = dist/(adjust*atan(1)*4)*360;
-  L.spinFor(rev,target,deg,0);
-  R.spinFor(rev,target,deg);  
-}
-
 void Fwd(double dist) {
   L.spinFor(fwd,dist*18,deg,0);
   R.spinFor(fwd,dist*18,deg);
@@ -154,7 +142,6 @@ void Fwd(double dist) {
 void Rev(double dist) {
   L.spinFor(rev,dist*18,deg,0);
   R.spinFor(rev,dist*18,deg);
-
 }
 
 void lft(double ang, double adjust) {
@@ -162,8 +149,8 @@ void lft(double ang, double adjust) {
   inert.setRotation(0,deg);
   while(fabs(inert.rotation(deg)) < ang) {
     double error = ang - fabs(inert.rotation(deg));
-    R.spin(fwd,20 + error*adjust,pct);
-    L.spin(rev,20 + error*adjust,pct);
+    R.spin(fwd,5 + error*adjust,pct);
+    L.spin(rev,5 + error*adjust,pct);
   }
   L.stop();
   R.stop();
@@ -174,8 +161,8 @@ void rgt(double ang, double adjust) {
   inert.setRotation(0,deg);
   while(fabs(inert.rotation(deg)) < ang) {
     double error = ang - fabs(inert.rotation(deg));
-    R.spin(rev,20 + error*adjust,pct);
-    L.spin(fwd,20 + error*adjust,pct);
+    R.spin(rev,5 + error*adjust,pct);
+    L.spin(fwd,5 + error*adjust,pct);
   }
   L.stop();
   R.stop();
