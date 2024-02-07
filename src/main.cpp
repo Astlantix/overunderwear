@@ -137,7 +137,6 @@ void usercontrol(void) {
       checkhot = 1;
     }
 
-
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.

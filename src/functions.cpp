@@ -96,7 +96,7 @@ void intaking() {
         b = 2;
       }
     } else if (b==1) {
-      if(mash.ButtonR1.pressing()) {
+      if (mash.ButtonR1.pressing()) {
         intake.stop(coast);
         b = 0;
       } else if (mash.ButtonR2.pressing()) {
@@ -172,7 +172,7 @@ void batmobile() {
   while (1) {
     double speed;
     if(mash.ButtonB.pressing()) {
-      
+
     }
   }
 }
@@ -193,6 +193,14 @@ void arcade() {
     } else {
       L.spin(fwd,leftspeed,pct);
       R.spin(fwd,rightspeed,pct);
+    }
+    if(mash.ButtonRight.pressing()) {
+      msc(cata);
+      setv(90);
+      lft(13);
+      Rev(55);
+      rgt(135);
+      setstop();
     }
   }
   this_thread::sleep_for(10);
