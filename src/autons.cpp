@@ -125,25 +125,24 @@ void auton3() {
 
 // skills
 void auton4() {
-  /*timer t;
+  timer t;
   t.clear();
   msp(cata);
   waitUntil(t.time(sec) >= 40);
-  msc(cata);*/
-  setv(25);
-  //lft(13);
-  Rev(25);
-  wait(7,sec);
+  msc(cata);
+  setv(90);
+  lft(13);
+  Rev(58);
   L.stop();
   R.stop();
-  /*rgt(135);
-  Rev(20);
+  rgt(120);
+  Rev(25);
   wait(100,msec);
-  lft(45);
+  lft(30);
+  Rev(15);
   spread();
-  Rev(13);
-  wait(10,msec);
-  lft(90);*/
+  lft(90);
+  Rev(15);
 }
 
 // drivetrain test
