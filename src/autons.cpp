@@ -15,7 +15,6 @@ using namespace std;
 
 // Right Side AWP 4 triballs
 void auton1() {
-  timer t;
   setv(36);
   Fwd(29);
   rgt(90);
@@ -51,48 +50,6 @@ void auton1() {
   Fwd(5);
   wait(100,msec);
   Rev(5);
-  cout << t.time() << endl;
-  lft(75);
-  /*msp(intake,1);
-  wait(200,msec);
-  lft(135);
-  msp(intake);
-  Fwd(20);
-  wait(350,msec);
-  Rev(25);
-  rgt(135);
-  msp(intake,1);
-  wait(100,msec);
-  Fwd(12);
-  wings.open();
-  lft(90);
-  wings.close();
-  rgt(45);
-  msc(intake);
-  wait(100,msec);
-  Fwd(8.2);
-  wait(100,msec);
-  Rev(8.2);
-  lft(73);
-  msp(intake);
-  Fwd(29);
-  wait(100,msec);
-  rgt(85);
-  msp(intake,1);
-  wait(100,msec);
-  msp(intake);
-  lft(40);
-  Fwd(10);
-  wait(100,msec);
-  msc(intake);
-  lft(90);
-  wingactiona();
-  Rev(17);
-  Fwd(5);
-  wingactionb();
-  rgt(180);
-  msp(intake,1,90);
-  Fwd(5);*/
 }
 
 // Left Side AWP
@@ -143,6 +100,12 @@ void auton4() {
   spread();
   lft(90);
   Rev(15);
+  fold();
+  Fwd(10);
+  spread();
+  Rev(10);
+  fold();
+  Fwd(10);
 }
 
 // drivetrain test
