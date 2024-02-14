@@ -76,8 +76,11 @@ void auton2() {
 
 // Left Side Elims
 void auton3() {
-  msp(intake,1,90);
-  Fwd(15);
+  Rev(20);
+  Fwd(5);
+  Rev(15);
+  Fwd(5);
+  Rev(15);
 }
 
 // skills
