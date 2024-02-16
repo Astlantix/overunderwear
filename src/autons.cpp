@@ -2,7 +2,7 @@
 #include "autons.hpp"
 #include "functions.hpp"
 using namespace vex;
-using namespace std;
+
 
 /*   __   ______     __    ________    __   ____      
  /'_ `\/\  ___\  /'__`\ /\_____  \ /'__`\/\  _`\    
@@ -88,18 +88,33 @@ void auton4() {
   timer t;
   t.clear();
   msp(cata);
-  waitUntil(t.time(sec) >= 40);
+  waitUntil(t.time(sec) >= 30);
   msc(cata);
-  setv(90);
+  setv(50);
   lft(13);
-  Rev(58);
+  Rev(63);
   L.stop();
   R.stop();
   rgt(120);
   Rev(25);
   wait(100,msec);
-  lft(30);
-  Rev(15);
+  lft(40);
+  Rev(17);
+  spread();
+  lft(90);
+  L.spin(rev,50,pct);
+  R.spin(rev,50,pct);
+  wait(1,sec);
+  L.stop();
+  R.stop();
+  fold();
+  Fwd(10);
+  spread();
+  Rev(10);
+  fold();
+  Fwd(10);
+  rgt(90);
+  Rev(10);
   spread();
   lft(90);
   Rev(15);
@@ -109,6 +124,16 @@ void auton4() {
   Rev(10);
   fold();
   Fwd(10);
+  lft(50);
+  Fwd(10);
+  rgt(45);
+  spread();
+  L.spin(rev);
+  R.spin(rev);
+  wait(1.5,sec);
+  L.stop();
+  R.stop();
+  Fwd(5);
 }
 
 // drivetrain test

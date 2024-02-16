@@ -1,6 +1,6 @@
 #include "vex.h"
 #include "functions.hpp"
-
+#include <string>
 using namespace vex;
 using namespace std;
 using namespace chrono;
