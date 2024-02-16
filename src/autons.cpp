@@ -34,7 +34,9 @@ void auton1() {
   wait(100,msec);
   msp(intake,0);
   Fwd(4);
-  R.spinFor(fwd,360,deg);
+  R.spin(fwd);
+  wait(1,sec);
+  R.stop();
   msc(intake);
   spread();
   Rev(20);
