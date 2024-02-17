@@ -1,6 +1,7 @@
 #include "vex.h"
 #include "functions.hpp"
 #include <string>
+#include <cmath>
 using namespace vex;
 using namespace std;
 using namespace chrono;
@@ -179,8 +180,8 @@ void batmobile() {
 
 void arcade() {
   while (1) {
-    double leftspeed = (mash.Axis3.position() + mash.Axis4.position())*(abs(mash.Axis3.position() + mash.Axis4.position()))/100;
-    double rightspeed = (mash.Axis3.position() - mash.Axis4.position())*(abs(mash.Axis3.position() - mash.Axis4.position()))/100;
+    double leftspeed = pow((mash.Axis3.position() + mash.Axis4.position()), 3)/1000;
+    double rightspeed = pow((mash.Axis3.position() - mash.Axis4.position()), 3)/1000;
     if(mash.ButtonL1.pressing() && mash.ButtonL2.pressing()) {
       L.spin(fwd,100,pct);
       R.spin(fwd,100,pct);
@@ -207,22 +208,22 @@ void arcade() {
 }
 
 void tank() {
-  if(mash.ButtonL1.pressing() && mash.ButtonL2.pressing()) {
-    L.spin(fwd,100,pct);
-    R.spin(fwd,100,pct);
-}
-  else if(mash.ButtonL1.pressing()) {
-    L.spin(fwd,100,pct);
-    R.spin(fwd,0,pct);
-  } else if (mash.ButtonL2.pressing()) {
-    L.spin(fwd,0,pct);
-    R.spin(fwd,100,pct);
-  }
-  else {
-    double leftspeed = mash.Axis3.position()*abs(mash.Axis3.position())/100;
-    double rightspeed = mash.Axis2.position()*abs(mash.Axis2.position())/100;
-    L.spin(fwd,leftspeed,pct);
-    R.spin(fwd,rightspeed,pct);
+  while (1) {
+    if(mash.ButtonL1.pressing() && mash.ButtonL2.pressing()) {
+      L.spin(fwd,100,pct);
+      R.spin(fwd,100,pct);
+    } else if(mash.ButtonL1.pressing()) {
+      L.spin(fwd,100,pct);
+      R.spin(fwd,0,pct);
+    } else if (mash.ButtonL2.pressing()) {
+      L.spin(fwd,0,pct);
+      R.spin(fwd,100,pct);
+    } else {
+      double leftspeed = pow(mash.Axis3.position(), 3)/1000;
+      double rightspeed = pow(mash.Axis2.position(), 3)/1000;
+      L.spin(fwd,leftspeed,pct);
+      R.spin(fwd,rightspeed,pct);
+    }
   }
 }
 
@@ -249,4 +250,11 @@ void printing(string text) {
   mash.Screen.clearScreen();
   mash.Screen.setCursor(2,10);
   mash.Screen.print(text.c_str());
+}
+
+double temp(motor m) {return m.temperature(celsius);}
+
+void numbers() {
+  mash.Screen.clearScreen();
+  mash.Screen.print(fmax(fmax(fmax(temp(fl), temp(fr)), fmax(temp(bl), temp(br))), fmax(fmax(temp(ml), temp(mr)), fmax(temp(intake), temp(cata)))));
 }
