@@ -137,6 +137,8 @@ void usercontrol(void) {
       checkhot = 1;
     }
 
+    if (mash.ButtonA.pressing()) tipping();
+
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.
@@ -158,6 +160,7 @@ int main() {
   // Run the pre-autonomous function.
   pre_auton();
   arcade();
+  //tank();
   // Prevent main from exiting with an infinite loop.
   while (1) {
     wait(10, msec);

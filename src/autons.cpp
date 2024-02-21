@@ -15,28 +15,32 @@ using namespace vex;
 
 // Right Side AWP 4 triballs
 void auton1() {
-  setv(36);
-  Fwd(29);
+  setv(40);
+  //Fwd(30);
+  msp(intake,0);
+  pid(225);
   rgt(90);
+  wait(200,msec);
   msp(intake,1,90);
   wait(100,msec);
-  rgt(135);
+  rgt(140);
   msp(intake,0);
-  Fwd(20);
+  Fwd(18);
   wait(300,msec);
   setv(10);
   Rev(0.4);
-  rgt(170);
+  lft(160);
   setv(36);
   msp(intake,1);
   wait(100,msec);
-  lft(60);
+  lft(10);
   wait(100,msec);
   msp(intake,0);
-  Fwd(4);
+  Fwd(2.2);
   R.spin(fwd);
   wait(1,sec);
   R.stop();
+  wait(2,sec);
   msc(intake);
   spread();
   Rev(20);
@@ -52,6 +56,9 @@ void auton1() {
   Fwd(5);
   wait(100,msec);
   Rev(5);
+  wait(100,msec);
+  msc(intake);
+  fold();
 }
 
 // Left Side AWP
@@ -62,18 +69,13 @@ void auton2() {
   lft(45);
   wait(40,msec);
   wing.close();
-  rgt(10); 
-  msp(intake,1,90);
-  setv(100);
-  Fwd(12);
   wait(750,msec);
-  Rev(1);
-  lft(78);
-  msc(intake);
+  rgt(135);
   setv(40);
-  Rev(35);
-  wing.open();
-  lft(25);
+  msp(intake,1);
+  Fwd(25);
+  wait(1,sec);
+  msc(intake);
 }
 
 // Left Side Elims
@@ -87,7 +89,7 @@ void auton3() {
 
 // skills
 void auton4() {
-  timer t;
+  /*timer t;
   t.clear();
   msp(cata);
   waitUntil(t.time(sec) >= 30);
@@ -95,35 +97,48 @@ void auton4() {
   setv(50);
   lft(13);
   Rev(63);
+  setv(40);
   L.stop();
   R.stop();
   rgt(120);
-  Rev(25);
+  Rev(34);
   wait(100,msec);
   lft(40);
-  Rev(17);
+  Rev(13);
   spread();
   lft(90);
   L.spin(rev,50,pct);
   R.spin(rev,50,pct);
-  wait(1,sec);
+  wait(2,sec);
   L.stop();
   R.stop();
   fold();
   Fwd(10);
   spread();
-  Rev(10);
+  L.spin(rev,50,pct);
+  R.spin(rev,50,pct);
+  wait(2,sec);
+  L.stop();
+  R.stop();
   fold();
   Fwd(10);
   rgt(90);
   Rev(10);
   spread();
   lft(90);
-  Rev(15);
+  L.spin(rev,50,pct);
+  R.spin(rev,50,pct);
+  wait(2,sec);
+  L.stop();
+  R.stop();Rev(15);
   fold();
   Fwd(10);
   spread();
-  Rev(10);
+  L.spin(rev,50,pct);
+  R.spin(rev,50,pct);
+  wait(2,sec);
+  L.stop();
+  R.stop();
   fold();
   Fwd(10);
   lft(50);
@@ -135,13 +150,71 @@ void auton4() {
   wait(1.5,sec);
   L.stop();
   R.stop();
+  Fwd(10);*/
+  timer t;
+  t.clear();
+  msp(cata);
+  waitUntil(t.time(sec) >= 30);
+  msc(cata);
+  setv(50);
+  lft(13);
+  Rev(63);
+  rgt(40);
+  wing.open();
+  L.spin(rev,75,pct);
+  R.spin(rev,75,pct);
+  wait(1.5,sec);
+  L.stop();
+  R.stop();
+  wing.close();
+  Fwd(10);
+  lft(90);
+  Fwd(25);
+  rgt(30);
+  spread();
+  L.spin(rev);
+  R.spin(rev);
+  wait(1.5,sec);
+  L.stop();
+  R.stop();
+  fold();
+  Fwd(5);
+  lft(20);
+  Fwd(20);
+  rgt(20);
+  spread();
+  L.spin(rev);
+  R.spin(rev);
+  wait(1.5,sec);
+  L.stop();
+  R.stop();
+  fold();
+  Fwd(20);
+  lft(20);
+  rgt(30);
+  spread();
+  L.spin(rev);
+  R.spin(rev);
+  wait(1.5,sec);
+  L.stop();
+  R.stop();
+  fold();
+  Fwd(20);
+  lft(20);
+  spread();
+  L.spin(rev);
+  R.spin(rev);
+  wait(1.5,sec);
+  L.stop();
+  R.stop();
+  fold();
   Fwd(5);
 }
 
 // drivetrain test
 void auton5 () {
-  rgt(90);
-  wait(10,sec);
+  setstop();
+  setv(100);
   msp(fr);
   wait(1,sec);
   msc(fr);

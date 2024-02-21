@@ -90,10 +90,10 @@ void intaking() {
   if(durLastTake > 150) {
     if (b==0) {
       if (mash.ButtonR1.pressing()) {
-        intake.spin(rev,100,pct);
+        intake.spin(rev,400,rpm);
         b = 1;
       } else if (mash.ButtonR2.pressing()) {
-        intake.spin(fwd,100,pct);
+        intake.spin(fwd,400,rpm);
         b = 2;
       }
     } else if (b==1) {
@@ -101,7 +101,7 @@ void intaking() {
         intake.stop(coast);
         b = 0;
       } else if (mash.ButtonR2.pressing()) {
-        intake.spin(fwd,100,pct);
+        intake.spin(fwd,400,rpm);
         b = 2;
       }
     } else if (b==2) {
@@ -109,7 +109,7 @@ void intaking() {
         intake.stop(coast);
         b = 0;
       } else if (mash.ButtonR1.pressing()) {
-        intake.spin(rev,100,pct);
+        intake.spin(rev,400,rpm);
         b = 1;
       }
     }
@@ -254,7 +254,47 @@ void printing(string text) {
 
 double temp(motor m) {return m.temperature(celsius);}
 
-void numbers() {
-  mash.Screen.clearScreen();
-  mash.Screen.print(fmax(fmax(fmax(temp(fl), temp(fr)), fmax(temp(bl), temp(br))), fmax(fmax(temp(ml), temp(mr)), fmax(temp(intake), temp(cata)))));
+void pid(double target) {
+  double kp = 5;
+  double ki = 0;
+  double kd = 0;
+  double integral = 0;
+  double derivative = 0;
+  double lastError = 0;
+  double error = target - (L.position(deg) + R.position(deg)) / 2;
+  while (fabs(error) > 1) {
+    integral += error;
+    derivative = error - lastError;
+    double speed = kp*error + ki*integral + kd*derivative;
+    fl.spin(fwd,speed,pct);
+    fr.spin(fwd,speed,pct);
+    bl.spin(fwd,speed,pct);
+    br.spin(fwd,speed,pct);
+    ml.spin(fwd,speed,pct);
+    mr.spin(fwd,speed,pct);
+    lastError = error;
+    error = target - (L.position(deg) + R.position(deg)) / 2;
+  }
+  L.stop();
+  R.stop();
+}
+
+int tip() {
+  if (inert.roll() > 15) {
+    return 1; // go forward
+  } else if (inert.roll() < 15) {
+    return 2; // go backward
+  } else {
+    return 0;
+  }
+}
+
+void tipping() {
+  if (tip() == 1) {
+    L.spin(fwd,100,pct);
+    R.spin(fwd,100,pct);
+  } else if (tip() == 2) {
+    L.spin(rev,100,pct);
+    R.spin(rev,100,pct);
+  }
 }
