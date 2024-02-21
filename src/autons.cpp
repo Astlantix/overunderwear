@@ -15,10 +15,8 @@ using namespace vex;
 
 // Right Side AWP 4 triballs
 void auton1() {
-  setv(40);
-  //Fwd(30);
   msp(intake,0);
-  pid(225);
+  pid(500);
   rgt(90);
   wait(200,msec);
   msp(intake,1,90);

@@ -27,7 +27,7 @@ void punching();
 void pullback();
 void printing(std::string text);
 double temp(motor m);
-void pid(double target);
+int pid(double target);
 void tipping();
 
 #endif // FUNCTIONS_HPP
