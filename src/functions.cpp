@@ -65,7 +65,47 @@ void wingaction() {
   if (flapping) {
     fold();
   } else {
-      spread();
+    spread();
+  }
+}
+
+bool lflap = 0;
+bool rflap = 0;
+
+void lwing() {
+  if (lflap) {
+    wing.open();
+  } else {
+    wing.close();
+  }
+}
+
+void rwing() {
+  if (rflap) {
+    bat.open();
+  } else {
+    bat.close();
+  }
+}
+
+steady_clock::time_point lastLWing;
+steady_clock::time_point lastRWing;
+
+void lwings() {
+  auto now = steady_clock::now();
+  auto durLastLWing = duration_cast<milliseconds>(now - lastLWing).count();
+  if (durLastLWing > 200) {
+    lflap = !lflap;
+    lastLWing = now;
+  }
+}
+
+void rwings() {
+  auto now = steady_clock::now();
+  auto durLastRWing = duration_cast<milliseconds>(now - lastRWing).count();
+  if (durLastRWing > 200) {
+    rflap = !rflap;
+    lastRWing = now;
   }
 }
 
@@ -90,10 +130,10 @@ void intaking() {
   if(durLastTake > 150) {
     if (b==0) {
       if (mash.ButtonR1.pressing()) {
-        intake.spin(rev,400,rpm);
+        intake.spin(rev,450,rpm);
         b = 1;
       } else if (mash.ButtonR2.pressing()) {
-        intake.spin(fwd,400,rpm);
+        intake.spin(fwd,100,pct);
         b = 2;
       }
     } else if (b==1) {
@@ -101,7 +141,7 @@ void intaking() {
         intake.stop(coast);
         b = 0;
       } else if (mash.ButtonR2.pressing()) {
-        intake.spin(fwd,400,rpm);
+        intake.spin(fwd,100,pct);
         b = 2;
       }
     } else if (b==2) {
@@ -109,7 +149,7 @@ void intaking() {
         intake.stop(coast);
         b = 0;
       } else if (mash.ButtonR1.pressing()) {
-        intake.spin(rev,400,rpm);
+        intake.spin(rev,450,rpm);
         b = 1;
       }
     }
@@ -182,19 +222,8 @@ void arcade() {
   while (1) {
     double leftspeed = pow((mash.Axis3.position() + mash.Axis4.position()), 3)/1000;
     double rightspeed = pow((mash.Axis3.position() - mash.Axis4.position()), 3)/1000;
-    if(mash.ButtonL1.pressing() && mash.ButtonL2.pressing()) {
-      L.spin(fwd,100,pct);
-      R.spin(fwd,100,pct);
-    } else if(mash.ButtonL1.pressing()) {
-      L.spin(fwd,100,pct);
-      R.spin(fwd,0,pct);
-    } else if (mash.ButtonL2.pressing()) {
-      L.spin(fwd,0,pct);
-      R.spin(fwd,100,pct);
-    } else {
       L.spin(fwd,leftspeed,pct);
       R.spin(fwd,rightspeed,pct);
-    }
     if(mash.ButtonRight.pressing()) {
       msc(cata);
       setv(90);
@@ -304,7 +333,7 @@ void graphPID(std::vector<int> errorHistory, std::vector<float> powerHistory, in
 }
 
 int pid(double target) {
-  double kP = 0.0615;
+  double kP = 0.0515;
   double kI = 0.0115;
   double kD = 0.5;
   double error = 0;

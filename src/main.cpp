@@ -121,6 +121,11 @@ void usercontrol(void) {
     mash.ButtonY.pressed(wingaction);
     mash.ButtonY.released(flap);
 
+    mash.ButtonL2.pressed(rwing);
+    mash.ButtonL2.released(rwings);
+    mash.ButtonL1.pressed(lwing);
+    mash.ButtonL1.released(lwings);
+    
     // catapult
     mash.ButtonX.pressed(punching);
     mash.ButtonX.released(pullback);
