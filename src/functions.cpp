@@ -133,7 +133,7 @@ void intaking() {
         intake.spin(rev,450,rpm);
         b = 1;
       } else if (mash.ButtonR2.pressing()) {
-        intake.spin(fwd,100,pct);
+        intake.spin(fwd,85,pct);
         b = 2;
       }
     } else if (b==1) {
@@ -141,7 +141,7 @@ void intaking() {
         intake.stop(coast);
         b = 0;
       } else if (mash.ButtonR2.pressing()) {
-        intake.spin(fwd,100,pct);
+        intake.spin(fwd,85,pct);
         b = 2;
       }
     } else if (b==2) {
@@ -220,40 +220,34 @@ void batmobile() {
 
 void arcade() {
   while (1) {
-    double leftspeed = pow((mash.Axis3.position() + mash.Axis4.position()), 3)/1000;
-    double rightspeed = pow((mash.Axis3.position() - mash.Axis4.position()), 3)/1000;
-      L.spin(fwd,leftspeed,pct);
-      R.spin(fwd,rightspeed,pct);
-    if(mash.ButtonRight.pressing()) {
-      msc(cata);
-      setv(90);
-      lft(13);
-      Rev(55);
-      rgt(135);
-      setstop();
-    }
+    double leftspeed = pow((mash.Axis3.position() + mash.Axis4.position()), 3)/100000 * 11;
+    double rightspeed = pow((mash.Axis3.position() - mash.Axis4.position()), 3)/100000 * 11;
+
+    if (leftspeed > 11) leftspeed = 11;
+    if (rightspeed > 11) rightspeed = 11;
+
+    fl.spin(fwd,leftspeed,volt);
+    br.spin(fwd,rightspeed,volt);
+    ml.spin(fwd,leftspeed,volt);
+    fr.spin(fwd,rightspeed,volt);
+    bl.spin(fwd,leftspeed,volt);
+    mr.spin(fwd,rightspeed,volt);
   }
   this_thread::sleep_for(10);
 }
 
 void tank() {
   while (1) {
-    if(mash.ButtonL1.pressing() && mash.ButtonL2.pressing()) {
-      L.spin(fwd,100,pct);
-      R.spin(fwd,100,pct);
-    } else if(mash.ButtonL1.pressing()) {
-      L.spin(fwd,100,pct);
-      R.spin(fwd,0,pct);
-    } else if (mash.ButtonL2.pressing()) {
-      L.spin(fwd,0,pct);
-      R.spin(fwd,100,pct);
-    } else {
-      double leftspeed = pow(mash.Axis3.position(), 3)/1000;
-      double rightspeed = pow(mash.Axis2.position(), 3)/1000;
-      L.spin(fwd,leftspeed,pct);
-      R.spin(fwd,rightspeed,pct);
-    }
+    double leftspeed = pow(mash.Axis3.position(), 3)/1000;
+    double rightspeed = pow(mash.Axis2.position(), 3)/1000;
+    fl.spin(fwd,leftspeed,pct);
+    br.spin(fwd,rightspeed,pct);
+    ml.spin(fwd,leftspeed,pct);
+    fr.spin(fwd,rightspeed,pct);
+    bl.spin(fwd,leftspeed,pct);
+    mr.spin(fwd,rightspeed,pct);
   }
+  this_thread::sleep_for(10);
 }
 
 steady_clock::time_point lastHit;
