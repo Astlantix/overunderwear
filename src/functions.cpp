@@ -329,7 +329,7 @@ void graphPID(std::vector<int> errorHistory, std::vector<float> powerHistory, in
 int pid(double target) {
   double kP = 0.0515;
   double kI = 0.0115;
-  double kD = 0.5;
+  double kD = 0.8;
   double error = 0;
   double integral = 0;
   double derivative = 0;
