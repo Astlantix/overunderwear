@@ -23,6 +23,7 @@ void auton1() {
   wait(300,msec);
   lft(150);
   msp(intake,0,100);
+  inert.resetRotation();
   pid(250);
   wait(100,msec);
   rgt(160);
@@ -38,13 +39,13 @@ void auton1() {
   spread();
   pid(-250);
   msp(intake,0,100);
-  pid(100);
+  pid(350);
+  wait(200,msec);
   L.spin(rev,100,pct);
   R.spin(rev,100,pct);
-  wait(1,sec);
+  wait(1.5,sec);
   L.stop();
   R.stop();
-  pid(100);
   fold();
   msc(intake);
 }

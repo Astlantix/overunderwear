@@ -24,6 +24,8 @@ void Fwd(double dist);
 void Rev(double dist);
 void lft(double ang, double adjust =  0.1);
 void rgt(double ang, double adjust = 0.1);
+void Right(double ang, double adjust = 0.1);
+void Left(double ang, double adjust = 0.1);
 void arcade();
 void splitarcade();
 void tank();

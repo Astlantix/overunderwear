@@ -125,7 +125,7 @@ steady_clock::time_point printake; // time last intake pressing
 
 // intake thing
 void intaking() {
-  auto now = steady_clock::now(); // current time
+  /*auto now = steady_clock::now(); // current time
   auto durLastTake = duration_cast<milliseconds>(now-printake).count();
   if(durLastTake > 150) {
     if (b==0) {
@@ -154,6 +154,13 @@ void intaking() {
       }
     }
     printake = now;
+  }*/
+  if (mash.ButtonR1.pressing()) {
+    intake.spin(rev,450,rpm);
+  } else if (mash.ButtonR2.pressing()) {
+    intake.spin(fwd,85,pct);
+  } else {
+    intake.stop(coast);
   }
 }
 
@@ -209,6 +216,28 @@ void rgt(double ang, double adjust) {
   R.stop();
 }
 
+void Right(double ang, double adjust) {
+  setstop(1);
+  while(fabs(inert.rotation(deg)) < ang) {
+    double error = ang - fabs(inert.rotation(deg));
+    R.spin(rev,5 + error*adjust,pct);
+    L.spin(fwd,5 + error*adjust,pct);
+  }
+  L.stop();
+  R.stop();
+}
+
+void Left(double ang, double adjust) {
+  setstop(1);
+  while(fabs(inert.rotation(deg)) < ang) {
+    double error = ang - fabs(inert.rotation(deg));
+    R.spin(fwd,5 + error*adjust,pct);
+    L.spin(rev,5 + error*adjust,pct);
+  }
+  L.stop();
+  R.stop();
+}
+
 void arcade() {
   while (1) {
     double leftspeed = pow((mash.Axis3.position() + mash.Axis4.position()), 3)/100000 * 11;
@@ -229,8 +258,8 @@ void arcade() {
 
 void splitarcade() {
   while (1) {
-    double leftspeed = pow(mash.Axis3.position() + mash.Axis1.position(), 3)/1000;
-    double rightspeed = pow(mash.Axis2.position() - mash.Axis1.position(), 3)/1000;
+    double leftspeed = pow(mash.Axis3.position() + mash.Axis1.position()/2, 3)/1000;
+    double rightspeed = pow(mash.Axis3.position() - mash.Axis1.position()/2, 3)/1000;
 
     if (leftspeed > 11) leftspeed = 11;
     if (rightspeed > 11) rightspeed = 11;
