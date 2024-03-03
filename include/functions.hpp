@@ -24,14 +24,13 @@ void Fwd(double dist);
 void Rev(double dist);
 void lft(double ang, double adjust =  0.1);
 void rgt(double ang, double adjust = 0.1);
-void batmobile();
 void arcade();
+void splitarcade();
 void tank();
 void punching();
 void pullback();
 void printing(std::string text);
 double temp(motor m);
 int pid(double target);
-void tipping();
 
 #endif // FUNCTIONS_HPP

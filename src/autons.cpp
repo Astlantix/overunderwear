@@ -23,13 +23,13 @@ void auton1() {
   wait(300,msec);
   lft(150);
   msp(intake,0,100);
-  pid(225);
+  pid(250);
   wait(100,msec);
   rgt(160);
   msp(intake,1,100);
-  lft(50);
+  lft(40);
   msp(intake,0,100);
-  pid(185);
+  pid(200);
   wait(100,msec);
   rgt(55);
   msp(intake,1,100);

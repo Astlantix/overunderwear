@@ -209,19 +209,28 @@ void rgt(double ang, double adjust) {
   R.stop();
 }
 
-void batmobile() {
-  while (1) {
-    double speed;
-    if(mash.ButtonB.pressing()) {
-
-    }
-  }
-}
-
 void arcade() {
   while (1) {
     double leftspeed = pow((mash.Axis3.position() + mash.Axis4.position()), 3)/100000 * 11;
     double rightspeed = pow((mash.Axis3.position() - mash.Axis4.position()), 3)/100000 * 11;
+
+    if (leftspeed > 11) leftspeed = 11;
+    if (rightspeed > 11) rightspeed = 11;
+
+    fl.spin(fwd,leftspeed,volt);
+    br.spin(fwd,rightspeed,volt);
+    ml.spin(fwd,leftspeed,volt);
+    fr.spin(fwd,rightspeed,volt);
+    bl.spin(fwd,leftspeed,volt);
+    mr.spin(fwd,rightspeed,volt);
+  }
+  this_thread::sleep_for(10);
+}
+
+void splitarcade() {
+  while (1) {
+    double leftspeed = pow(mash.Axis3.position() + mash.Axis1.position(), 3)/1000;
+    double rightspeed = pow(mash.Axis2.position() - mash.Axis1.position(), 3)/1000;
 
     if (leftspeed > 11) leftspeed = 11;
     if (rightspeed > 11) rightspeed = 11;
@@ -399,24 +408,4 @@ int pid(double target) {
   bl.stop();
   br.stop();
   return 0;
-}
-
-int tip() {
-  if (inert.roll() > 15) {
-    return 1; // go forward
-  } else if (inert.roll() < 15) {
-    return 2; // go backward
-  } else {
-    return 0;
-  }
-}
-
-void tipping() {
-  if (tip() == 1) {
-    L.spin(fwd,100,pct);
-    R.spin(fwd,100,pct);
-  } else if (tip() == 2) {
-    L.spin(rev,100,pct);
-    R.spin(rev,100,pct);
-  }
 }
