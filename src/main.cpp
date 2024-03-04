@@ -142,6 +142,12 @@ void usercontrol(void) {
       checkhot = 1;
     }
 
+    if (mash.ButtonB.pressing()) {
+      setstop(2);
+    } else {
+      setstop();
+    }
+
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.
