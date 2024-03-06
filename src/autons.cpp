@@ -52,7 +52,7 @@ void auton1() {
 
 // Left Side AWP
 void auton2() {
-  setv(50);
+  /*setv(50);
   wing.open();
   wait(300,msec);
   lft(45);
@@ -64,7 +64,19 @@ void auton2() {
   msp(intake,1);
   Fwd(27);
   wait(1,sec);
-  msc(intake);
+  msc(intake);*/
+  msp(intake,1,100);
+  wait(1,sec);
+  wing.open();
+  lft(45);
+  wing.close();
+  rgt(45);
+  pid(75);
+  L.spin(reverse);
+  wait(100,msec);
+  pid(-75);
+  lft(80);
+  pid(-75); 
 }
 
 // Left Side Elims

@@ -171,7 +171,7 @@ void setstop(int mode) {
   } else if (mode == 1) {
     L.setStopping(brake);
     R.setStopping(brake);
-  } else if (mode == 2) {
+  } else {
     L.setStopping(hold);
     R.setStopping(hold);
   }
