@@ -21,18 +21,17 @@ void auton1() {
   rgt(60);
   wait(150,msec);
   msp(intake,1,40);
-  wait(200,msec);
   wait(300,msec);
   lft(150);
   msp(intake,0,100);
   Fwd(12);
-  wait(150,msec);
+  wait(200,msec);
   rgt(160);
   msp(intake,1,100);
   lft(40);
   msp(intake,0,100);
   Fwd(11);
-  wait(100,msec);
+  wait(200,msec);
   Rev(0.5);
   rgt(55);
   msp(intake,1,100);
@@ -43,7 +42,7 @@ void auton1() {
   wait(100,msec);
   msp(intake,0,100);
   setv(100);
-  Fwd(10);
+  Fwd(10.4);
   wait(200,msec);
   L.spin(rev,100,pct);
   R.spin(rev,100,pct);
@@ -55,7 +54,7 @@ void auton1() {
   Fwd(11);
   rgt(180);
   msp(intake,1,100);
-  wait(100,msec);
+  wait(200,msec);
   Fwd(10);
   std::cout << t.time(msec) << std::endl;
   Rev(10);
