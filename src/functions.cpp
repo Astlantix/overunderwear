@@ -365,9 +365,9 @@ void graphPID(std::vector<int> errorHistory, std::vector<float> powerHistory, in
 }
 
 int pid(double target) {
-  double kP = 0.0515;
-  double kI = 0.0115;
-  double kD = 0.8;
+  double kP = 0.007;
+  double kI = 0.005;
+  double kD = 0.05;
   double error = 0;
   double integral = 0;
   double derivative = 0;
@@ -383,7 +383,7 @@ int pid(double target) {
   bl.setPosition(0,deg);
   br.setPosition(0,deg);
 
-   /* //lists
+    /*//lists
     std::vector<int> errorHistory; //keep track of error over time
     std::vector<float> powerHistory; //keep track of motor power over time
     int currentTime = 0; //keep track of time over time (wow!)*/
@@ -415,18 +415,18 @@ int pid(double target) {
     bl.spin(fwd,11*power,volt);
     br.spin(fwd,11*power,volt);
 
-    if (error > -5 && error < 5 && error - prevError > -3 && error - prevError < 3) break;
+    if (error > -7 && error < 7 && error - prevError > -10 && error - prevError < 10) break;
 
     prevPower = power;
     prevError = error;
 
-    /*//update histories and current time
+    /*/update histories and current time
     errorHistory.push_back(error);
     powerHistory.push_back(std::fabs(power));
     currentTime += 20;
 
     //graph the PIDs 
-    graphPID(errorHistory, powerHistory, target, error, currentTime);*/
+    graphPID(errorHistory, powerHistory, target, error, currentTime); /*/
 
     wait(20,msec);
   }

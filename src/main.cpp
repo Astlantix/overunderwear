@@ -174,6 +174,5 @@ int main() {
   // Prevent main from exiting with an infinite loop.
   while (1) {
     wait(10, msec);
-    L.spin(rev,0,pct);
   }
 }

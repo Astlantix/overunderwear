@@ -15,44 +15,56 @@ using namespace vex;
 
 // Right Side AWP 4 triballs
 void auton1() {
+  setv(100);
+  timer t;
   pid(430);
   rgt(60);
-  wait(200,msec);
+  wait(150,msec);
   msp(intake,1,40);
   wait(200,msec);
   wait(300,msec);
   lft(150);
   msp(intake,0,100);
-  inert.resetRotation();
-  pid(250);
-  wait(100,msec);
+  Fwd(12);
+  wait(150,msec);
   rgt(160);
   msp(intake,1,100);
   lft(40);
   msp(intake,0,100);
-  pid(200);
+  Fwd(11);
   wait(100,msec);
+  Rev(0.5);
   rgt(55);
   msp(intake,1,100);
   wait(100,msec);
-  lft(170);
+  lft(160);
+  msc(intake);
   spread();
-  pid(-250);
+  wait(100,msec);
   msp(intake,0,100);
-  pid(350);
+  setv(100);
+  Fwd(10);
   wait(200,msec);
   L.spin(rev,100,pct);
   R.spin(rev,100,pct);
-  wait(1.5,sec);
+  wait(0.7,sec);
   L.stop();
   R.stop();
   fold();
+  msc(intake);
+  Fwd(11);
+  rgt(180);
+  msp(intake,1,100);
+  wait(100,msec);
+  Fwd(10);
+  std::cout << t.time(msec) << std::endl;
+  Rev(10);
   msc(intake);
 }
 
 // Left Side AWP
 void auton2() {
-  /*setv(50);
+  setv(50);
   wing.open();
   wait(300,msec);
   lft(45);
@@ -64,19 +76,20 @@ void auton2() {
   msp(intake,1);
   Fwd(27);
   wait(1,sec);
-  msc(intake);*/
-  msp(intake,1,100);
-  wait(1,sec);
-  wing.open();
+  msc(intake);
+  /*wing.open();
   lft(45);
   wing.close();
-  rgt(45);
-  pid(75);
-  L.spin(reverse);
+  rgt(20);
+  pid(210);
+  msp(intake,1,100);
+  Fwd(5);
   wait(100,msec);
-  pid(-75);
-  lft(80);
-  pid(-75); 
+  pid(-300);
+  wait(100,msec);
+  lft(60);
+  msc(intake);
+  pid(-300);*/
 }
 
 // Left Side Elims
@@ -234,4 +247,5 @@ void auton5 () {
   msp(br);
   wait(1,sec);
   msc(br);
+  //pid(500);
 }
