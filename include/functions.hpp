@@ -34,5 +34,6 @@ void pullback();
 void printing(std::string text);
 double temp(motor m);
 int pid(double target);
+int ppid(double target);
 
 #endif // FUNCTIONS_HPP

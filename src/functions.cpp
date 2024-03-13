@@ -25,7 +25,7 @@ void autonslctr() {
       auton = 5;
   }
   if (auton == 1) {
-      printing("RAWP");
+      printing("R AWP");
   } else if (auton == 2) {
       printing("LAWP");
   } else if (auton == 3) {
@@ -197,8 +197,8 @@ void lft(double ang, double adjust) {
   inert.setRotation(0,deg);
   while(fabs(inert.rotation(deg)) < ang) {
     double error = ang - fabs(inert.rotation(deg));
-    R.spin(fwd,5 + error*adjust,pct);
-    L.spin(rev,5 + error*adjust,pct);
+    R.spin(fwd,5 + error*0.15,pct);
+    L.spin(rev,5 + error*0.15,pct);
   }
   L.stop();
   R.stop();
@@ -206,11 +206,11 @@ void lft(double ang, double adjust) {
 
 void rgt(double ang, double adjust) {
   setstop(1);
-  inert.setRotation(0,deg);
+  inert.resetRotation();
   while(fabs(inert.rotation(deg)) < ang) {
     double error = ang - fabs(inert.rotation(deg));
-    R.spin(rev,5 + error*adjust,pct);
-    L.spin(fwd,5 + error*adjust,pct);
+    R.spin(rev,5 + error*0.15,pct);
+    L.spin(fwd,5 + error*0.15,pct);
   }
   L.stop();
   R.stop();
@@ -316,7 +316,7 @@ void printing(string text) {
 double temp(motor m) {return m.temperature(celsius);}
 
 //graphing data, used for PID tuning
-void graphPID(std::vector<int> errorHistory, std::vector<float> powerHistory, int goal, float error, int time) {
+void graphPID(vector<int> errorHistory, vector<float> powerHistory, int goal, float error, int time) {
   //goal is the PID goal (driveDistance)
   //error history is a list of all of the errors (range is 0 to driveDistance)
   //powerHistory is a list of the power applied (range is -1 to 1)
@@ -360,7 +360,7 @@ void graphPID(std::vector<int> errorHistory, std::vector<float> powerHistory, in
       Brain.Screen.setPenColor(yellow);
     }
     
-    Brain.Screen.drawLine(x, maxY - std::abs(powerHistory.at(i)) * (maxY - minY), x + (float)(maxX - minX) / errorHistory.size(), maxY - std::abs(powerHistory.at(i + 1)) * (maxY - minY));
+    Brain.Screen.drawLine(x, maxY - abs(powerHistory.at(i)) * (maxY - minY), x + (float)(maxX - minX) / errorHistory.size(), maxY - abs(powerHistory.at(i + 1)) * (maxY - minY));
   }
 }
 
@@ -384,8 +384,8 @@ int pid(double target) {
   br.setPosition(0,deg);
 
     /*//lists
-    std::vector<int> errorHistory; //keep track of error over time
-    std::vector<float> powerHistory; //keep track of motor power over time
+    vector<int> errorHistory; //keep track of error over time
+    vector<float> powerHistory; //keep track of motor power over time
     int currentTime = 0; //keep track of time over time (wow!)*/
 
   while (1) {
@@ -422,7 +422,81 @@ int pid(double target) {
 
     /*/update histories and current time
     errorHistory.push_back(error);
-    powerHistory.push_back(std::fabs(power));
+    powerHistory.push_back(fabs(power));
+    currentTime += 20;
+
+    //graph the PIDs 
+    graphPID(errorHistory, powerHistory, target, error, currentTime); /*/
+
+    wait(20,msec);
+  }
+  fl.stop();
+  fr.stop();
+  ml.stop();
+  mr.stop();
+  bl.stop();
+  br.stop();
+  return 0;
+}
+int ppid(double target) {
+  double kP = 0.007;
+  double kI = 0.005;
+  double kD = 0.05;
+  double error = 0;
+  double integral = 0;
+  double derivative = 0;
+  double prevError = 0;
+
+  double power = 0;
+  double prevPower = 0;
+
+  fl.setPosition(0,deg);
+  fr.setPosition(0,deg);
+  ml.setPosition(0,deg);
+  mr.setPosition(0,deg);
+  bl.setPosition(0,deg);
+  br.setPosition(0,deg);
+
+    /*//lists
+    vector<int> errorHistory; //keep track of error over time
+    vector<float> powerHistory; //keep track of motor power over time
+    int currentTime = 0; //keep track of time over time (wow!)*/
+
+  while (1) {
+    double currentDist = (fl.position(deg) + fr.position(deg) + ml.position(deg) + mr.position(deg) + bl.position(deg) + br.position(deg))/6;
+
+    error = target - currentDist;
+    if(fabs(integral) > 200) {
+      integral += error;
+    }
+
+    derivative = error - prevError;
+
+    power = (kP*error) + (kI*integral) + (kD*derivative);
+
+    if (power > 1) power = 1;
+    if (power < -1) power = -1;
+
+    double slew = 0.1;
+
+    if (power > prevPower + slew) power = prevPower + slew;
+    if (power < prevPower - slew) power = prevPower - slew;
+
+    fl.spin(fwd,9*power,volt);
+    fr.spin(fwd,9*power,volt);
+    ml.spin(fwd,9*power,volt);
+    mr.spin(fwd,9*power,volt);
+    bl.spin(fwd,9*power,volt);
+    br.spin(fwd,9*power,volt);
+
+    if (error > -7 && error < 7 && error - prevError > -10 && error - prevError < 10) break;
+
+    prevPower = power;
+    prevError = error;
+
+    /*/update histories and current time
+    errorHistory.push_back(error);
+    powerHistory.push_back(fabs(power));
     currentTime += 20;
 
     //graph the PIDs 
